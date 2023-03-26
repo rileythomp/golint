@@ -6,7 +6,7 @@ To begin I picked a relatively small service that had ~90 linter warnings. My fi
 
 My strategy up until this point was to just view each file in my IDE, go to where warnings were highlighted, and fix them.
 
-![ide-warning](golint/ide-warning.png)
+![ide-warning](media/ide-warning.png)
 
 This worked okay for the first service, but it was a bit tedious and repetitive for the next couple services. I wanted a way to automatically be taken to each warning 1 by 1 as I fix them for each file in a package. This would greatly speed up my process by reducing the small amounts of time wasted scrolling to warnings and opening files. Many of the warnings being fixed were repetitive or had easy fixes that weren't suggested by the IDE. So I also wanted a way to automatically suggest warnings and apply them if I approved. This would save lots of time from not having to type out the same solution over and over again.
 
@@ -18,7 +18,7 @@ $ golangci-lint run
 
 which produces output like this:
 
-![cli-warning](golint/cli-warning.png)
+![cli-warning](media/cli-warning.png)
 
 The first step is to parse the linter output into a list of warnings. Then for each warning we can parse out the file path, line number and column position and open the warning in an IDE. For VSCode this can be done with the following command:
 
