@@ -1,6 +1,6 @@
 # Assisted Linting for Go
 
-The company I work at has a microservices backend composed of a large number of Go services. We recently added a Github action to run a linter on the repo when a pull request (PR) is made. Almost all of our repos were failing this check so it wasn't required but it meant that all PRs showed a failed check. This was a bit annoying so I decided to start trying to fix all the warnings on some services.
+The company I work at has a microservices backend composed of a large number of Go services. We recently added a Github action to run a [linter](https://en.wikipedia.org/wiki/Lint_(software)) on the repo when a pull request (PR) is made. Almost all of our repos were failing this check so it wasn't required but it still meant that all PRs showed a failed check. This was a bit annoying so I decided to start trying to fix all the warnings on some services.
 
 To begin I picked a relatively small service that had ~90 linter warnings. My first attempt was to go through the entire repo and fix every warning in one commit. I was able to fix all the warnings, but the resulting PR had almost 50 files and over 1000 lines including unit tests. This would be a bit unwieldly for reviewers and didn't allow for an incremental approach to the linting. So instead I decided to lint the repo package by package, with a separate PR for each one. Although a bit slower, this was a much better approach as it allowed for manageable PRs of 5-10 files and 50-150 or so lines. For this first service it ended up being 9 PRs. Not too bad! So I decided to try some other services.
 
@@ -26,7 +26,7 @@ The first step is to parse the linter output into a list of warnings. Then for e
 $ code --goto <file>:<line>:<column>
 ```
 
-Then we can just wait for the user to fix the warning and press enter to continue to the next warning. 
+Then we can just wait for the user to fix the warning and press enter to continue on to the next warning. 
 
 This was already a lot better, but it was still a hassle having to fix each warning manually. I added a step after opening a warning to check if the linter warning matched a list of known warning regexes. If it did, it would suggest a fix and ask the user if they wanted to apply it. If yes, the warning would be fixed automatically. Otherwise, the fix would be skipped and the user could fix the warning manually. This was a huge time saver as it allowed me to fix many warnings with just a single key press.
 
