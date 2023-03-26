@@ -309,7 +309,7 @@ def lint_folder(folder):
             print(f"{'-' * 20}\n")
             file_location = parts[0].split(" ")[0][:-1]
             file_parts = file_location.split(":")
-            if shutil.which("idea") is not None:
+            if shutil.which("code") is not None:
                 subprocess.run(f"code --goto {file_location}", shell=True)
             elif shutil.which("goland") is not None:
                 subprocess.run(f"goland --line {file_parts[1]} {file_parts[0]}", shell=True)
